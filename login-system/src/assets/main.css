@@ -9,11 +9,10 @@
 
 body {
   min-height: 100vh;
+  min-height: 100dvh;
   margin: 0;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
 
   background:
     radial-gradient(
@@ -23,6 +22,11 @@ body {
     ),
     linear-gradient(180deg, #06110d 0%, #020706 100%);
   overflow-x: hidden;
+}
+
+#app {
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 @media (max-width: 600px) {

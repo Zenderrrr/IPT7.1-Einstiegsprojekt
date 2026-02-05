@@ -1,37 +1,92 @@
+<script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const username = ref("");
+const password = ref("");
+const loading = ref(false);
+const error = ref("");
+
+function isValidEmail(v) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+}
+
+async function onSubmit() {
+  error.value = "";
+
+  if (!isValidEmail(username.value)) {
+    error.value = "Please enter a valid email.";
+    return;
+  }
+  if (password.value.length < 6) {
+    error.value = "Password must be at least 6 characters.";
+    return;
+  }
+
+  loading.value = true;
+  try {
+    const res = await fetch(
+      "https://ipt71.kuno-schuerch.bbzwinf.ch/user/login",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          username: username.value,
+          password: password.value,
+        }),
+      },
+    );
+
+    if (!res.ok) {
+      error.value = "Login failed.";
+      return;
+    }
+
+    localStorage.setItem("loggedIn", "true");
+    await router.push("/products");
+  } catch (e) {
+    error.value = "Network error. Try again.";
+  } finally {
+    loading.value = false;
+  }
+}
+</script>
+
 <template>
-  <section class="login">
-    <form>
-      <h1>Login</h1>
+  <section class="auth-page">
+    <section class="login">
+      <form @submit.prevent="onSubmit">
+        <h1>Login</h1>
 
-      <div class="inputbox">
-        <ion-icon name="mail-outline"></ion-icon>
-        <input type="text" required />
-        <label>Email</label>
-      </div>
+        <p v-if="error" class="error">{{ error }}</p>
 
-      <div class="inputbox">
-        <ion-icon name="lock-closed-outline"></ion-icon>
-        <input type="password" required />
-        <label>Password</label>
-      </div>
+        <div class="inputbox">
+          <ion-icon name="mail-outline"></ion-icon>
+          <input v-model.trim="username" type="email" required />
+          <label>Email</label>
+        </div>
 
-      <div class="forget">
-        <label>
-          <input type="checkbox" />
-          Remember me
-        </label>
-        <a href="#">Forget Password</a>
-      </div>
+        <div class="inputbox">
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <input v-model="password" type="password" required minlength="6" />
+          <label>Password</label>
+        </div>
 
-      <button type="submit">Log in</button>
+        <button type="submit" :disabled="loading">
+          {{ loading ? "Logging in..." : "Log in" }}
+        </button>
 
-      <div class="register">
-        <p>
-          Don't have an account?
-          <a href="#">Register</a>
-        </p>
-      </div>
-    </form>
+        <div class="register">
+          <p>
+            Don't have an account?
+            <RouterLink to="/register">Register</RouterLink>
+          </p>
+        </div>
+      </form>
+    </section>
   </section>
 </template>
 
@@ -39,13 +94,10 @@
 .login {
   position: relative;
   width: min(420px, 92vw);
-  background-color: transparent;
   border: 2px solid rgba(255, 255, 255, 0.5);
   border-radius: 20px;
   backdrop-filter: blur(15px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-backdrop-filter: blur(15px);
   padding: 2rem 3rem;
 }
 
@@ -158,6 +210,23 @@ button:hover {
 
 .register p a:hover {
   text-decoration: underline;
+}
+
+.auth-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 24px 12px;
+}
+
+.error {
+  color: #fff;
+  background: rgba(255, 60, 60, 0.2);
+  border: 1px solid rgba(255, 60, 60, 0.35);
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin-bottom: 12px;
 }
 
 @media (max-width: 360px) {

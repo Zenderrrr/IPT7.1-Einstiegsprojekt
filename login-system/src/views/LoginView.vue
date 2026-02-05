@@ -38,7 +38,7 @@
 <style scoped>
 .login {
   position: relative;
-  width: 400px;
+  width: min(420px, 92vw);
   background-color: transparent;
   border: 2px solid rgba(255, 255, 255, 0.5);
   border-radius: 20px;
@@ -58,7 +58,7 @@ h1 {
 .inputbox {
   position: relative;
   margin: 30px 0;
-  width: 300px;
+  width: 100%;
   border-bottom: 2px solid #fff;
 }
 
@@ -80,7 +80,7 @@ input:valid ~ label {
 
 .inputbox input {
   width: 100%;
-  height: 60px;
+  height: 56px;
   background: transparent;
   border: none;
   outline: none;
@@ -158,5 +158,17 @@ button:hover {
 
 .register p a:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 360px) {
+  .forget {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  button {
+    height: 44px;
+  }
 }
 </style>

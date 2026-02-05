@@ -2,10 +2,10 @@
 import Header from "./components/Header.vue";
 import { RouterView } from "vue-router";
 import Footer from "./components/Footer.vue";
+import LoginView from "./views/LoginView.vue";
 </script>
 
 <template>
-  <Header />
-  <RouterView />
-  <Footer />
+  <!-- temporarily -->
+  <LoginView />
 </template>

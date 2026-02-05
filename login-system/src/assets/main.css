@@ -1,0 +1,118 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "poppins", sans-serif;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      1200px 700px at 50% 0%,
+      rgba(90, 255, 210, 0.15),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #06110d 0%, #020706 100%);
+  overflow: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: -40%;
+  pointer-events: none;
+  z-index: 0;
+
+  background: repeating-linear-gradient(
+    115deg,
+    rgba(180, 255, 230, 0) 0px,
+    rgba(180, 255, 230, 0) 18px,
+    rgba(180, 255, 230, 0.12) 19px,
+    rgba(180, 255, 230, 0) 70px
+  );
+
+  mix-blend-mode: screen;
+  filter: blur(1px);
+  opacity: 0.75;
+
+  animation: raysMove 10s ease-in-out infinite;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: -30%;
+  pointer-events: none;
+  z-index: 0;
+
+  background:
+    radial-gradient(
+      circle at 10% 30%,
+      rgba(255, 255, 255, 0.1) 0 2px,
+      transparent 3px
+    ),
+    radial-gradient(
+      circle at 30% 60%,
+      rgba(255, 255, 255, 0.08) 0 2px,
+      transparent 3px
+    ),
+    radial-gradient(
+      circle at 70% 40%,
+      rgba(255, 255, 255, 0.1) 0 2px,
+      transparent 3px
+    ),
+    radial-gradient(
+      circle at 90% 70%,
+      rgba(255, 255, 255, 0.08) 0 2px,
+      transparent 3px
+    ),
+    radial-gradient(
+      900px 500px at 20% 40%,
+      rgba(50, 120, 90, 0.2),
+      transparent 70%
+    ),
+    radial-gradient(
+      900px 500px at 80% 50%,
+      rgba(30, 90, 70, 0.18),
+      transparent 70%
+    );
+
+  filter: blur(0.3px);
+  opacity: 0.85;
+
+  animation: fogDrift 14s ease-in-out infinite;
+}
+
+@keyframes raysMove {
+  0% {
+    transform: translateX(-6%) translateY(-2%) rotate(-2deg);
+    opacity: 0.65;
+  }
+  50% {
+    transform: translateX(6%) translateY(2%) rotate(2deg);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateX(-6%) translateY(-2%) rotate(-2deg);
+    opacity: 0.65;
+  }
+}
+
+@keyframes fogDrift {
+  0% {
+    transform: translateX(-2%) translateY(0%);
+  }
+  50% {
+    transform: translateX(2%) translateY(-1%);
+  }
+  100% {
+    transform: translateX(-2%) translateY(0%);
+  }
+}

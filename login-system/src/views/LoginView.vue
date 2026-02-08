@@ -82,7 +82,7 @@ async function onSubmit() {
         <div class="register">
           <p>
             Don't have an account?
-            <RouterLink to="/register">Register</RouterLink>
+            <RouterLink to="/registration">Register</RouterLink>
           </p>
         </div>
       </form>

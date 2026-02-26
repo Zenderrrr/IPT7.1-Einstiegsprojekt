@@ -43,14 +43,11 @@ async function loadProducts() {
   }
 
   try {
-    const res = await fetch(
-      "https://ipt71.kuno-schuerch.bbzwinf.ch/product/list",
-      {
-        method: "GET",
-        headers: { Accept: "application/json" },
-        credentials: "include",
-      },
-    );
+    const res = await fetch("api/product/list", {
+      method: "GET",
+      headers: { Accept: "application/json" },
+      credentials: "include",
+    });
 
     if (!res.ok) {
       error.value = "Could not load products. Please login again.";

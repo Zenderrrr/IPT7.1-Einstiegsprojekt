@@ -27,18 +27,15 @@ async function onSubmit() {
 
   loading.value = true;
   try {
-    const res = await fetch(
-      "https://ipt71.kuno-schuerch.bbzwinf.ch/user/login",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({
-          username: username.value,
-          password: password.value,
-        }),
-      },
-    );
+    const res = await fetch("api/user/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        username: username.value,
+        password: password.value,
+      }),
+    });
 
     if (!res.ok) {
       error.value = "Login failed.";

@@ -37,21 +37,18 @@ async function onSubmit() {
 
   loading.value = true;
   try {
-    const res = await fetch(
-      "https://ipt71.kuno-schuerch.bbzwinf.ch/user/register",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({
-          username: username.value,
-          firstname: firstname.value,
-          lastname: lastname.value,
-          password: password.value,
-          language: language.value, // de | en | fr
-        }),
-      },
-    );
+    const res = await fetch("api/user/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        username: username.value,
+        firstname: firstname.value,
+        lastname: lastname.value,
+        password: password.value,
+        language: language.value, // de | en | fr
+      }),
+    });
 
     if (!res.ok) {
       error.value = "Registration failed. Try another email or check inputs.";

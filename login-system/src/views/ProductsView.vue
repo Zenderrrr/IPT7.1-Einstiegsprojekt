@@ -46,7 +46,6 @@ async function loadProducts() {
     const res = await fetch("api/product/list", {
       method: "GET",
       headers: { Accept: "application/json" },
-      credentials: "include",
     });
 
     if (!res.ok) {

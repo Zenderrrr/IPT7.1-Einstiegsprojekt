@@ -30,7 +30,6 @@ async function onSubmit() {
     const res = await fetch("api/user/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      credentials: "include",
       body: JSON.stringify({
         username: username.value,
         password: password.value,
